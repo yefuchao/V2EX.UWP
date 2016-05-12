@@ -43,13 +43,6 @@ namespace UWP.V2EX
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
 
-#if DEBUG
-            if (System.Diagnostics.Debugger.IsAttached)
-            {
-                this.DebugSettings.EnableFrameRateCounter = true;
-            }
-#endif
-
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,

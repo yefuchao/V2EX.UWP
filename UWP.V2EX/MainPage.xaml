@@ -5,33 +5,27 @@
     xmlns:local="using:UWP.V2EX"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model ="using:UWP.V2EX.Models"
     mc:Ignorable="d" Loaded="Page_Loaded">
 
-    <!--<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <ScrollViewer Grid.Row="1" Margin="20" BorderThickness="0">
-                <ItemsControl Name="Display">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                --><!--<HyperlinkButton NavigateUri="{Binding Path=}"--><!--
-                                <TextBlock TextWrapping="Wrap" Text="{Binding Path=}" Width="500" Height="200"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </ScrollViewer>
+            <ListView Name="hotsView"
+                      IsItemClickEnabled="True"
+                      ItemClick="hotsView_ItemClick"
+                      ItemsSource="{x:Bind hots}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="10,5,0,5" Background="Pink">
+                            <TextBlock Foreground="Black" Text="{Binding title}" FontSize="18" Height="25"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </Grid>
-    </Grid>-->
-
-    <StackPanel Background="YellowGreen">
-        <ListView>
-            <TextBlock Name="Hot_Title" Width="800" Height="200"/>
-        </ListView>
-
-    </StackPanel>
+    </Grid>
 </Page>

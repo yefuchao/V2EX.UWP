@@ -8,19 +8,39 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using UWP.V2EX.Models;
+using System.Collections.ObjectModel;
 
 namespace UWP.V2EX
 {
     public class V2EXAPIProxy
     {
+        public static async Task GetHotThemsAsync(ObservableCollection<ThemeObject> hots)
+        {
+            try
+            {
+                var hotTheme = await GetHot();
+
+                foreach (var theme in hotTheme)
+                {
+                    hots.Add(theme);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         //最热
-        public async static Task<List<RootObject>> GetHot()
+        public async static Task<ObservableCollection<ThemeObject>> GetHot()
         {
             var http = new HttpClient();
             var response = await http.GetAsync("https://www.v2ex.com/api/topics/hot.json");
             var result = await response.Content.ReadAsStringAsync();
 
-            var data = JsonConvert.DeserializeObject<List<RootObject>>(result);
+            var data = JsonConvert.DeserializeObject<ObservableCollection<ThemeObject>>(result);
 
             //var serializer = new DataContractJsonSerializer(typeof(RootObject));
 
@@ -31,161 +51,60 @@ namespace UWP.V2EX
         }
 
         //最新
-        public async static Task<List<RootObject>> GetLatest()
+        public async static Task<ObservableCollection<ThemeObject>> GetLatest()
         {
             var http = new HttpClient();
 
             var response = await http.GetAsync("https://www.v2ex.com/api/topics/latest.json");
             var result = await response.Content.ReadAsStringAsync();
 
-            var data = JsonConvert.DeserializeObject<List<RootObject>>(result);
+            var data = JsonConvert.DeserializeObject<ObservableCollection<ThemeObject>>(result);
+
+            return data;
+        }
+
+        //评论
+        public async static Task<ObservableCollection<ReplyObject>> GetReply(string id)
+        {
+            var http = new HttpClient();
+            var url = string.Format("https://www.v2ex.com//api/replies/show.json?topic_id={0}", id);
+            var response = await http.GetAsync(url);
+            var result = await response.Content.ReadAsStringAsync();
+
+            var data = JsonConvert.DeserializeObject<ObservableCollection<ReplyObject>>(result);
 
             return data;
         }
 
         //节点
-        public async static Task<List<NodeObject>> GetNode(string nodename)
+        public async static Task<ObservableCollection<NodeObject>> GetNode(string nodename)
         {
             var http = new HttpClient();
             var url = string.Format("https://www.v2ex.com/api/nodes/show.json?name={0}", nodename);
             var response = await http.GetAsync(url);
             var result = await response.Content.ReadAsStringAsync();
 
-            var data = JsonConvert.DeserializeObject<List<NodeObject>>(result);
+            var data = JsonConvert.DeserializeObject<ObservableCollection<NodeObject>>(result);
 
             return data;
         }
 
         //用户信息
-        public async static Task<List<UserObject>> getUserInfo(string name)
+        public async static Task<ObservableCollection<UserObject>> getUserInfo(string name)
         {
             var http = new HttpClient();
             var url = string.Format("https://www.v2ex.com/api/members/show.json?username={0}", name);
             var response = await http.GetAsync(url);
             var result = await response.Content.ReadAsStringAsync();
 
-            var data = JsonConvert.DeserializeObject<List<UserObject>>(result);
+            var data = JsonConvert.DeserializeObject<ObservableCollection<UserObject>>(result);
 
             return data;
         }
     }
 
-    [DataContract]
-    public class Member
-    {
-        [DataMember]
-        public int id { get; set; }
-        [DataMember]
-        public string username { get; set; }
-        [DataMember]
-        public string tagline { get; set; }
-        [DataMember]
-        public string avatar_mini { get; set; }
-        [DataMember]
-        public string avatar_normal { get; set; }
-        [DataMember]
-        public string avatar_large { get; set; }
-    }
+    
 
-    [DataContract]
-    public class Node
-    {
-        [DataMember]
-        public int id { get; set; }
-        [DataMember]
-        public string name { get; set; }
-        [DataMember]
-        public string title { get; set; }
-        [DataMember]
-        public string title_alternative { get; set; }
-        [DataMember]
-        public string url { get; set; }
-        [DataMember]
-        public int topics { get; set; }
-        [DataMember]
-        public string avatar_mini { get; set; }
-        [DataMember]
-        public string avatar_normal { get; set; }
-        [DataMember]
-        public string avatar_large { get; set; }
-    }
 
-    [DataContract]
-    public class RootObject
-    {
-        [DataMember]
-        public int id { get; set; }
-        [DataMember]
-        public string title { get; set; }
-        [DataMember]
-        public string url { get; set; }
-        [DataMember]
-        public string content { get; set; }
-        [DataMember]
-        public string content_rendered { get; set; }
-        [DataMember]
-        public int replies { get; set; }
-        [DataMember]
-        public Member member { get; set; }
-        [DataMember]
-        public Node node { get; set; }
-        [DataMember]
-        public int created { get; set; }
-        [DataMember]
-        public int last_modified { get; set; }
-        [DataMember]
-        public int last_touched { get; set; }
-    }
-
-    [DataContract]
-    public class NodeObject
-    {
-        [DataMember]
-        public int id { get; set; }
-        [DataMember]
-        public string name { get; set; }
-        [DataMember]
-        public string url { get; set; }
-        [DataMember]
-        public string title { get; set; }
-        [DataMember]
-        public string title_alternative { get; set; }
-        [DataMember]
-        public int topics { get; set; }
-        [DataMember]
-        public int stars { get; set; }
-        [DataMember]
-        public string header { get; set; }
-        [DataMember]
-        public object footer { get; set; }
-        [DataMember]
-        public int created { get; set; }
-        [DataMember]
-        public string avatar_mini { get; set; }
-        [DataMember]
-        public string avatar_normal { get; set; }
-        [DataMember]
-        public string avatar_large { get; set; }
-    }
-
-    public class UserObject
-    {
-        public string status { get; set; }
-        public int id { get; set; }
-        public string url { get; set; }
-        public string username { get; set; }
-        public string website { get; set; }
-        public string twitter { get; set; }
-        public string psn { get; set; }
-        public string github { get; set; }
-        public string btc { get; set; }
-        public string location { get; set; }
-        public string tagline { get; set; }
-        public string bio { get; set; }
-        public string avatar_mini { get; set; }
-        public string avatar_normal { get; set; }
-        public string avatar_large { get; set; }
-        public int created { get; set; }
-    }
 
 }
