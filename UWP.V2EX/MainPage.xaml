@@ -1,0 +1,37 @@
+﻿<Page
+    x:Class="UWP.V2EX.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWP.V2EX"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Loaded="Page_Loaded">
+
+    <!--<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <ScrollViewer Grid.Row="1" Margin="20" BorderThickness="0">
+                <ItemsControl Name="Display">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                --><!--<HyperlinkButton NavigateUri="{Binding Path=}"--><!--
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Path=}" Width="500" Height="200"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+    </Grid>-->
+
+    <StackPanel Background="YellowGreen">
+        <ListView>
+            <TextBlock Name="Hot_Title" Width="800" Height="200"/>
+        </ListView>
+
+    </StackPanel>
+</Page>
