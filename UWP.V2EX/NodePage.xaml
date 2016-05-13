@@ -6,11 +6,55 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Loaded="Page_Loaded"
+    xmlns:model="using:UWP.V2EX.Models"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
         <StackPanel>
-            <TextBlock Name="Hello" />
+            <TextBlock Name="Nodename" 
+                       FontSize="40" 
+                       Foreground="Green"/>
         </StackPanel>
+        <ListView Name="NodeTopic_View"
+                  IsItemClickEnabled="True"
+                  ItemClick="NodeTopic_View_ItemClick"
+                  ItemsSource="{x:Bind NodetopicList}"
+                  Grid.Row="1">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Name="AvarPanel">
+                            <Image Source="{Binding member.avatar_large}" />
+                        </StackPanel>
+                        <StackPanel Name="Content" 
+                                    Margin="10,5,0,5">
+                            <StackPanel Name="TitlePanel">
+                                <TextBlock Foreground="Black"
+                                           Text="{Binding title}"
+                                           FontSize="13" Height="20" />
+                            </StackPanel>
+                            <StackPanel Name="Name"
+                                        Orientation="Horizontal">
+                                <Button Name="NodeButton"
+                                        Content="{Binding node.name}"
+                                        Click="NodeButton_Click"
+                                        FontSize="10"
+                                        Margin="0,3,3,0"
+                                        Foreground="Black"
+                                        Background="White" />
+                                <TextBlock Foreground="Black"
+                                           Text="{Binding member.username}"
+                                           FontSize="10"
+                                           Height="13" />
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>

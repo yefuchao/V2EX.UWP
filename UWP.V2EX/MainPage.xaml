@@ -23,8 +23,8 @@
                         <StackPanel Orientation="Horizontal" Margin="10,5,0,5">
                             <StackPanel Name="AvarPanl">
                                 <Image Source="{Binding member.avatar_large}" 
-                                       Height="44" 
-                                       Width="44"/>
+                                       MinHeight="44" 
+                                       MinWidth="30"/>
                             </StackPanel>
                             <StackPanel Name="Content" 
                                         Margin="10,5,0,5" >

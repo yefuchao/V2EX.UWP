@@ -65,6 +65,9 @@ namespace UWP.V2EX
 
                 foreach (var reply in replys)
                 {
+                    reply.member.avatar_mini = "http:" + reply.member.avatar_mini;
+                    reply.member.avatar_normal = "http:" + reply.member.avatar_normal;
+                    reply.member.avatar_large = "http:" + reply.member.avatar_large;
                     replysList.Add(reply);
                 }
             }
@@ -97,6 +100,9 @@ namespace UWP.V2EX
                 var alltopics = await GetNodeTpoics(nodename);
                 foreach (var topic in alltopics)
                 {
+                    topic.member.avatar_mini = "http:" + topic.member.avatar_mini;
+                    topic.member.avatar_normal = "http:" + topic.member.avatar_normal;
+                    topic.member.avatar_large = "http:" + topic.member.avatar_large;
                     nodetopicList.Add(topic);
                 }
             }

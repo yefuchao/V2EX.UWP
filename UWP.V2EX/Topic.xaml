@@ -14,9 +14,15 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <StackPanel >
+        <StackPanel Margin="0,0,10,0">
             <Button Name="BackButton" Content="Back" Click="BackButton_Click" />
-            <TextBlock Name="Test" Foreground="Green"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Name="Title" Foreground="Green" Margin="0,0,10,10" />
+                <Image Name="Avar" MinHeight="50" MinWidth="50" />
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Name="Content" FontSize="10" />
+            </StackPanel>
         </StackPanel>
         <ListView Grid.Row="1"
                   Name="ReplyList"
@@ -25,7 +31,11 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Foreground="Black" Text="{Binding content}" FontSize="13" Height="20" />
+                        <Image Source="{Binding member.avatar_large}" MinHeight="44" MinWidth="44" Margin="0,0,5,0"/>
+                        <StackPanel>
+                            <TextBlock Text="{Binding member.username}" Margin="0,0,0,3"/>
+                            <TextBlock Foreground="Black" Text="{Binding content}" FontSize="13" Height="20" />
+                        </StackPanel>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

@@ -51,7 +51,9 @@ namespace UWP.V2EX
                 throw;
             }
 
-            Test.Text = topic.title;
+            Title.Text = topic.title;
+            Content.Text = topic.content;
+            //Avar.Source = topic.member.avatar_large;
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

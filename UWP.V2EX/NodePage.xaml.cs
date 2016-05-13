@@ -55,7 +55,17 @@ namespace UWP.V2EX
                 throw;
             }
 
-            Hello.Text = nodename;
+            Nodename.Text = nodename;
+        }
+
+        private void NodeTopic_View_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+        }
+
+        private void NodeButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
