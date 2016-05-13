@@ -16,50 +16,41 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace UWP.V2EX
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class HomePage : Page
     {
-        public ObservableCollection<ThemeObject> hots { get; set; }
+        public ObservableCollection<ThemeObject> alltopic { get;set;}
 
-        public MainPage()
+        public HomePage()
         {
             this.InitializeComponent();
 
-            hots = new ObservableCollection<ThemeObject>();
-            
+            alltopic = new ObservableCollection<ThemeObject>();
+        }
+
+        private void AllTopic_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var topic = (ThemeObject)e.ClickedItem;
+            Frame.Navigate(typeof(Topic), topic);
         }
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-
             try
             {
-                Task t = V2EXAPIProxy.GetHotThemsAsync(hots);
+                Task t = V2EXAPIProxy.GetAllTopic(alltopic);
                 await t;
             }
             catch (Exception)
             {
                 throw;
-             //   Hot_Title.Text = "加载失败！";
             }
-
-        }
-
-        private void hotsView_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            var topic = (ThemeObject)e.ClickedItem;
-            Frame.Navigate(typeof(Topic),topic);
-        }
-
-        private void HomeButton_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(HomePage));
         }
     }
 }

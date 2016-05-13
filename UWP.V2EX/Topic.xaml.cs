@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using UWP.V2EX.Models;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -23,16 +25,31 @@ namespace UWP.V2EX
     /// </summary>
     public sealed partial class Topic : Page
     {
+        public ObservableCollection<ReplyObject> replys { get; set; }
+
+
         public Topic()
         {
             this.InitializeComponent();
+
+            replys = new ObservableCollection<ReplyObject>();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            base.OnNavigatedTo(e);
 
             var topic = (ThemeObject)e.Parameter;
+
+            try
+            {
+                Task t = V2EXAPIProxy.GetReplaysAsync(replys,topic.id);
+                await t;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
 
             Test.Text = topic.title;
         }
@@ -40,6 +57,11 @@ namespace UWP.V2EX
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             Frame.GoBack();
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

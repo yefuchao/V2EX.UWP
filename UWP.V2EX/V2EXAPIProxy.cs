@@ -15,6 +15,25 @@ namespace UWP.V2EX
 {
     public class V2EXAPIProxy
     {
+
+        public static async Task GetAllTopic(ObservableCollection<ThemeObject> alltopic)
+        {
+            try
+            {
+                var topics = await GetLatest();
+
+                foreach (var topic in topics)
+                {
+                    alltopic.Add(topic);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public static async Task GetHotThemsAsync(ObservableCollection<ThemeObject> hots)
         {
             try
@@ -24,6 +43,24 @@ namespace UWP.V2EX
                 foreach (var theme in hotTheme)
                 {
                     hots.Add(theme);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public static async Task GetReplaysAsync(ObservableCollection<ReplyObject> replysList,int id)
+        {
+            try
+            {
+                var replys = await GetReply(id);
+
+                foreach (var reply in replys)
+                {
+                    replysList.Add(reply);
                 }
             }
             catch (Exception)
@@ -64,14 +101,28 @@ namespace UWP.V2EX
         }
 
         //评论
-        public async static Task<ObservableCollection<ReplyObject>> GetReply(string id)
+        public async static Task<ObservableCollection<ReplyObject>> GetReply(int id)
         {
             var http = new HttpClient();
-            var url = string.Format("https://www.v2ex.com//api/replies/show.json?topic_id={0}", id);
+            var url = string.Format("https://www.v2ex.com/api/replies/show.json?topic_id={0}", id);
             var response = await http.GetAsync(url);
             var result = await response.Content.ReadAsStringAsync();
 
             var data = JsonConvert.DeserializeObject<ObservableCollection<ReplyObject>>(result);
+
+            return data;
+        }
+
+
+        //取主题信息
+        public async static Task<ObservableCollection<ThemeObject>> GetTopics(int id)
+        {
+            var http = new HttpClient();
+            var url = string.Format("https://www.v2ex.com/api/topics/show.json?id={0}", id);
+            var response = await http.GetAsync(url);
+            var result = await response.Content.ReadAsStringAsync();
+
+            var data = JsonConvert.DeserializeObject<ObservableCollection<ThemeObject>>(result);
 
             return data;
         }

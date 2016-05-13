@@ -20,12 +20,16 @@
                       ItemsSource="{x:Bind hots}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal" Margin="10,5,0,5" Background="Pink">
+                        <StackPanel Orientation="Horizontal" Margin="10,5,0,5">
                             <TextBlock Foreground="Black" Text="{Binding title}" FontSize="18" Height="25"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+
+            <StackPanel Grid.Row="1">
+                <Button Name="HomeButton" Content="Home" Click="HomeButton_Click" />
+            </StackPanel>
         </Grid>
     </Grid>
 </Page>
