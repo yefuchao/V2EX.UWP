@@ -21,14 +21,42 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" Margin="10,5,0,5">
-                            <TextBlock Foreground="Black" Text="{Binding title}" FontSize="18" Height="25"/>
+                            <StackPanel Name="AvarPanl">
+                                <Image Source="{Binding member.avatar_large}" 
+                                       Height="44" 
+                                       Width="44"/>
+                            </StackPanel>
+                            <StackPanel Name="Content" 
+                                        Margin="10,5,0,5" >
+                                <StackPanel>
+                                    <TextBlock Foreground="Black" 
+                                               Text="{Binding title}" 
+                                               FontSize="13" Height="20" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Name="NodeButton" 
+                                            Content="{Binding node.name}" 
+                                            Click="NodeButton_Click" 
+                                            FontSize="10" 
+                                            Margin="0,3,3,0" 
+                                            Foreground="Black" 
+                                            Background="White"/>
+
+                                    <TextBlock Foreground="Black" 
+                                               Text="{Binding member.username}" 
+                                               FontSize="10" 
+                                               Height="13"/>
+                                </StackPanel>
+                            </StackPanel>
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
 
             <StackPanel Grid.Row="1">
-                <Button Name="HomeButton" Content="Home" Click="HomeButton_Click" />
+                <Button Name="HomeButton" 
+                        Content="Home" 
+                        Click="HomeButton_Click" />
             </StackPanel>
         </Grid>
     </Grid>

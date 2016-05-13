@@ -108,9 +108,15 @@
     <Compile Include="Models\Reply.cs" />
     <Compile Include="Models\Theme.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="NodePage.xaml.cs">
+      <DependentUpon>NodePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Topic.xaml.cs">
       <DependentUpon>Topic.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserInfo.xaml.cs">
+      <DependentUpon>UserInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="V2EXAPIProxy.cs" />
   </ItemGroup>
@@ -143,7 +149,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="NodePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Topic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

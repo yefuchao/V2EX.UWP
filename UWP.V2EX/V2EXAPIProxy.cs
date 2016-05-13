@@ -15,7 +15,7 @@ namespace UWP.V2EX
 {
     public class V2EXAPIProxy
     {
-
+        //取最新主题
         public static async Task GetAllTopic(ObservableCollection<ThemeObject> alltopic)
         {
             try
@@ -34,6 +34,7 @@ namespace UWP.V2EX
             }
         }
 
+        //取最热主题
         public static async Task GetHotThemsAsync(ObservableCollection<ThemeObject> hots)
         {
             try
@@ -42,6 +43,9 @@ namespace UWP.V2EX
 
                 foreach (var theme in hotTheme)
                 {
+                    theme.member.avatar_mini = "http:" + theme.member.avatar_mini;
+                    theme.member.avatar_normal = "http:" + theme.member.avatar_normal;
+                    theme.member.avatar_large = "http:" + theme.member.avatar_large;
                     hots.Add(theme);
                 }
             }
@@ -52,6 +56,7 @@ namespace UWP.V2EX
             }
         }
 
+        //根据ID取回复
         public static async Task GetReplaysAsync(ObservableCollection<ReplyObject> replysList,int id)
         {
             try
@@ -68,6 +73,51 @@ namespace UWP.V2EX
 
                 throw;
             }
+        }
+
+        //取用户信息
+        public static async Task GetUserInfoAsync(UserObject userinfo,string name)
+        {
+            try
+            {
+                var user = await getUserInfo(name);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        //根据节点名称取节点内容
+        public static async Task GetNodeByUsernameAsync(ObservableCollection<ThemeObject> nodetopicList,string nodename)
+        {
+            try
+            {
+                var alltopics = await GetNodeTpoics(nodename);
+                foreach (var topic in alltopics)
+                {
+                    nodetopicList.Add(topic);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        //根据节点名称取主题
+        public async static Task<ObservableCollection<ThemeObject>> GetNodeTpoics(string nodename)
+        {
+            var http = new HttpClient();
+            var url = string.Format("https://www.v2ex.com/api/topics/show.json?node_name={0}", nodename);
+            var response = await http.GetAsync(url);
+            var result = await response.Content.ReadAsStringAsync();
+
+            var data = JsonConvert.DeserializeObject<ObservableCollection<ThemeObject>>(result);
+
+            return data;
         }
 
         //最热

@@ -61,5 +61,11 @@ namespace UWP.V2EX
         {
             Frame.Navigate(typeof(HomePage));
         }
+
+        private void NodeButton_Click(object sender, RoutedEventArgs e)
+        {
+            var nodename = (sender as Button).Content;
+            Frame.Navigate(typeof(NodePage),nodename);
+        }
     }
 }
