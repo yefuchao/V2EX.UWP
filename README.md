@@ -1,2 +1,3 @@
 # V2EX.UWP
-The Project is use for learn UWP.
+自己学习UWP开发的练手项目
+代码粗糙
