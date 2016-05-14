@@ -60,12 +60,9 @@ namespace UWP.V2EX
 
         private void NodeTopic_View_ItemClick(object sender, ItemClickEventArgs e)
         {
-
+            var topic = (ThemeObject)e.ClickedItem;
+            Frame.Navigate(typeof(Topic), topic);
         }
 
-        private void NodeButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

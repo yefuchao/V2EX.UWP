@@ -21,7 +21,7 @@
                 <Image Name="Avar" MinHeight="50" MinWidth="50" />
             </StackPanel>
             <StackPanel>
-                <TextBlock Name="Content" FontSize="10" />
+                <TextBlock Name="Contents" FontSize="10" />
             </StackPanel>
         </StackPanel>
         <ListView Grid.Row="1"

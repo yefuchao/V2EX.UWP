@@ -42,10 +42,19 @@
                                             Foreground="Black" 
                                             Background="White"/>
 
-                                    <TextBlock Foreground="Black" 
-                                               Text="{Binding member.username}" 
-                                               FontSize="10" 
-                                               Height="13"/>
+                                    <Button Name="UserName"
+                                            Content="{Binding member.username}"
+                                            FontSize="10"
+                                            Click="UserName_Click"
+                                            Margin="0,3,3,0"
+                                            Foreground="Black"
+                                            Background="White"/>
+
+                                    <TextBlock Foreground="Black"
+                                               Text="{Binding createdTime}"
+                                               FontSize="10"
+                                               Height="13" 
+                                               Margin="5,3,3,0"/>
                                 </StackPanel>
                             </StackPanel>
                         </StackPanel>

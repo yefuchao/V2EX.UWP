@@ -33,20 +33,24 @@ namespace UWP.V2EX
             user = new UserObject();
         }
 
-        //protected override async void OnNavigatedTo(NavigationEventArgs e)
-        //{
-        //    var topic = (ThemeObject)e.Parameter;
-        //    try
-        //    {
-        //        Task t = await V2EXAPIProxy.GetUserInfoAsync(user,topic.member.username);
-        //        await t;
-        //    }
-        //    catch (Exception)
-        //    {
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        {
+            //base.OnNavigatedTo(e);
+            var username = (string)e.Parameter;
 
-        //        throw;
-        //    }
+            try
+            {
+                Task t = V2EXAPIProxy.GetUserInfoAsync(user, username);
+                await t;
+            }
+            catch (Exception)
+            {
 
-        //}
+                throw;
+            }
+
+            //UserName.Text = user.username;
+            UserName.Text = username;
+        }
     }
 }

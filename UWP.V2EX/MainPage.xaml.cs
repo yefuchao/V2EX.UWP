@@ -67,5 +67,11 @@ namespace UWP.V2EX
             var nodename = (sender as Button).Content;
             Frame.Navigate(typeof(NodePage),nodename);
         }
+
+        private void UserName_Click(object sender, RoutedEventArgs e)
+        {
+            var username = (sender as Button).Content;
+            Frame.Navigate(typeof(UserInfo), username);
+        }
     }
 }

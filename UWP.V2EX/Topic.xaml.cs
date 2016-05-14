@@ -52,7 +52,7 @@ namespace UWP.V2EX
             }
 
             Title.Text = topic.title;
-            Content.Text = topic.content;
+            Contents.Text = topic.content;
             //Avar.Source = topic.member.avatar_large;
         }
 

@@ -5,6 +5,7 @@
     xmlns:local="using:UWP.V2EX"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model ="using:UWP.V2EX.Models"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -12,9 +13,14 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        <StackPanel Name="UserDetail" Orientation="Horizontal">
+            <Image Name="Avatar" MinHeight="44" MinWidth="44" />
+            <StackPanel>
+                <TextBlock Name="UserName" FontSize="15" Foreground="Black" />
+            </StackPanel>
+        </StackPanel>
         <StackPanel>
-            <Image Name="Avatar" Height="20" Width="20"/>
-            <TextBlock Name="Name" FontSize="15" Foreground="Black" />
+            
         </StackPanel>
     </Grid>
 </Page>

@@ -15,6 +15,14 @@ namespace UWP.V2EX
 {
     public class V2EXAPIProxy
     {
+        public static DateTime UnixTimeStampToDateTime(double unixTimeStamp)
+        {
+            // Unix timestamp is seconds past epoch
+            DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
+            return dtDateTime;
+        }
+
         //取最新主题
         public static async Task GetAllTopic(ObservableCollection<ThemeObject> alltopic)
         {
@@ -46,6 +54,11 @@ namespace UWP.V2EX
                     theme.member.avatar_mini = "http:" + theme.member.avatar_mini;
                     theme.member.avatar_normal = "http:" + theme.member.avatar_normal;
                     theme.member.avatar_large = "http:" + theme.member.avatar_large;
+
+                    theme.createdTime = UnixTimeStampToDateTime((double)theme.created);
+                    theme.last_modifiedTime = UnixTimeStampToDateTime((double)theme.last_modified);
+                    theme.last_touchedTime = UnixTimeStampToDateTime((double)theme.last_touched);
+
                     hots.Add(theme);
                 }
             }
@@ -197,14 +210,14 @@ namespace UWP.V2EX
         }
 
         //用户信息
-        public async static Task<ObservableCollection<UserObject>> getUserInfo(string name)
+        public async static Task<UserObject> getUserInfo(string name)
         {
             var http = new HttpClient();
             var url = string.Format("https://www.v2ex.com/api/members/show.json?username={0}", name);
             var response = await http.GetAsync(url);
             var result = await response.Content.ReadAsStringAsync();
 
-            var data = JsonConvert.DeserializeObject<ObservableCollection<UserObject>>(result);
+            var data = JsonConvert.DeserializeObject<UserObject>(result);
 
             return data;
         }

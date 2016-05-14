@@ -72,6 +72,12 @@ namespace UWP.V2EX.Models
         public int last_modified { get; set; }
         [DataMember]
         public int last_touched { get; set; }
+        [DataMember]
+        public DateTime createdTime { get; set; }
+        [DataMember]
+        public DateTime last_modifiedTime { get; set; }
+        [DataMember]
+        public DateTime last_touchedTime { get; set; }
     }
 
 

@@ -26,9 +26,9 @@
                   Grid.Row="1">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <StackPanel Name="AvarPanel">
-                            <Image Source="{Binding member.avatar_large}" />
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                        <StackPanel Name="AvarPanel" Margin="0,0,5,0">
+                            <Image Source="{Binding member.avatar_large}" MinWidth="44" MinHeight="44"/>
                         </StackPanel>
                         <StackPanel Name="Content" 
                                     Margin="10,5,0,5">
@@ -39,13 +39,6 @@
                             </StackPanel>
                             <StackPanel Name="Name"
                                         Orientation="Horizontal">
-                                <Button Name="NodeButton"
-                                        Content="{Binding node.name}"
-                                        Click="NodeButton_Click"
-                                        FontSize="10"
-                                        Margin="0,3,3,0"
-                                        Foreground="Black"
-                                        Background="White" />
                                 <TextBlock Foreground="Black"
                                            Text="{Binding member.username}"
                                            FontSize="10"
