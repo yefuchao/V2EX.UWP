@@ -9,11 +9,11 @@
     Loaded="Page_Loaded"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.RowDefinitions>
+    <Grid >
+        <!--<Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+        </Grid.RowDefinitions>-->
         <ListView Name="AllTopic"
                   IsItemClickEnabled="True"
                   ItemClick="AllTopic_ItemClick"

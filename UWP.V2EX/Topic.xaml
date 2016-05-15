@@ -33,7 +33,7 @@
                     <StackPanel Orientation="Horizontal">
                         <Image Source="{Binding member.avatar_large}" MinHeight="44" MinWidth="44" Margin="0,0,5,0"/>
                         <StackPanel>
-                            <TextBlock Text="{Binding member.username}" Margin="0,0,0,3"/>
+                            <Button Name="username" Content="{Binding member.username}" Margin="0,0,0,3" Background="White" Click="username_Click"/>
                             <TextBlock Foreground="Black" Text="{Binding content}" FontSize="13" Height="20" />
                         </StackPanel>
                     </StackPanel>

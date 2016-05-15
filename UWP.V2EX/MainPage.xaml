@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:model ="using:UWP.V2EX.Models"
-    mc:Ignorable="d" Loaded="Page_Loaded">
+    mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid>
@@ -14,59 +14,59 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <ListView Name="hotsView"
-                      IsItemClickEnabled="True"
-                      ItemClick="hotsView_ItemClick"
-                      ItemsSource="{x:Bind hots}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal" Margin="10,5,0,5">
-                            <StackPanel Name="AvarPanl">
-                                <Image Source="{Binding member.avatar_large}" 
-                                       MinHeight="44" 
-                                       MinWidth="30"/>
+
+            <RelativePanel>
+                <Button Name="HamburgerButton" 
+                        RelativePanel.AlignLeftWithPanel="True"
+                        FontFamily="Segoe MDL2 Assets"
+                        FontSize="36"
+                        Content="&#xE700;"
+                        Click="HamburgerButton_Click"/>
+
+                <Button Name="BackButton" 
+                        RelativePanel.RightOf="HamburgerButton"
+                        FontFamily="Segoe MDL2 Assets"
+                        FontSize="36"
+                        Content="&#xE0C4;"
+                        Click="BackButton_Click"/>
+
+                <TextBlock Name="TitileTextBlock"
+                           RelativePanel.RightOf="BackButton"
+                           FontSize="28"
+                           FontWeight="Bold"
+                           Margin="20,5,0,0"/>
+            </RelativePanel>
+
+            <SplitView Grid.Row="1"
+                       Name="MySplitView"
+                       DisplayMode="CompactOverlay"
+                       OpenPaneLength="200"
+                       CompactPaneLength="56">
+                <SplitView.Pane>
+                    <ListBox SelectionMode="Single"
+                             SelectionChanged="ListBox_SelectionChanged">
+                        <ListBoxItem Name="Home">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="36" Text="&#xE80F;"/>
+                                <TextBlock FontSize="24" Margin="20,0,0,0">Home</TextBlock>
                             </StackPanel>
-                            <StackPanel Name="Content" 
-                                        Margin="10,5,0,5" >
-                                <StackPanel>
-                                    <TextBlock Foreground="Black" 
-                                               Text="{Binding title}" 
-                                               FontSize="13" Height="20" />
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <Button Name="NodeButton" 
-                                            Content="{Binding node.name}" 
-                                            Click="NodeButton_Click" 
-                                            FontSize="10" 
-                                            Margin="0,3,3,0" 
-                                            Foreground="Black" 
-                                            Background="White"/>
-
-                                    <Button Name="UserName"
-                                            Content="{Binding member.username}"
-                                            FontSize="10"
-                                            Click="UserName_Click"
-                                            Margin="0,3,3,0"
-                                            Foreground="Black"
-                                            Background="White"/>
-
-                                    <TextBlock Foreground="Black"
-                                               Text="{Binding createdTime}"
-                                               FontSize="10"
-                                               Height="13" 
-                                               Margin="5,3,3,0"/>
-                                </StackPanel>
+                        </ListBoxItem>
+                        <ListBoxItem Name="Hot">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="36" Text="&#xE1CE;" />
+                                <TextBlock FontSize="24" Margin="20,0,0,0">Hot</TextBlock>
                             </StackPanel>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-
-            <StackPanel Grid.Row="1">
-                <Button Name="HomeButton" 
-                        Content="Home" 
-                        Click="HomeButton_Click" />
-            </StackPanel>
+                        </ListBoxItem>
+                    </ListBox>
+                </SplitView.Pane>
+                
+                <SplitView.Content>
+                    <Frame Name="MyFrame">
+                        
+                    </Frame>
+                </SplitView.Content>
+                
+            </SplitView>
         </Grid>
     </Grid>
 </Page>

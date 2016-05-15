@@ -23,53 +23,50 @@ namespace UWP.V2EX
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Topic : Page
+    public sealed partial class HotPage : Page
     {
-        public ObservableCollection<ReplyObject> replys { get; set; }
 
+        public ObservableCollection<ThemeObject> hots { get; set; }
 
-        public Topic()
+        public HotPage()
         {
             this.InitializeComponent();
-
-            replys = new ObservableCollection<ReplyObject>();
+            hots = new ObservableCollection<ThemeObject>();
         }
 
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-
-            var topic = (ThemeObject)e.Parameter;
 
             try
             {
-                Task t = V2EXAPIProxy.GetReplaysAsync(replys,topic.id);
+                Task t = V2EXAPIProxy.GetHotThemsAsync(hots);
                 await t;
             }
             catch (Exception)
             {
-
                 throw;
+                //   Hot_Title.Text = "加载失败！";
             }
 
-            Title.Text = topic.title;
-            Contents.Text = topic.content;
-            //Avar.Source = topic.member.avatar_large;
         }
 
-        private void BackButton_Click(object sender, RoutedEventArgs e)
+        private void hotsView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            Frame.GoBack();
+            var topic = (ThemeObject)e.ClickedItem;
+            Frame.Navigate(typeof(Topic), topic);
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        private void NodeButton_Click(object sender, RoutedEventArgs e)
         {
-
+            var nodename = (sender as Button).Content;
+            Frame.Navigate(typeof(NodePage), nodename);
         }
 
-        private void username_Click(object sender, RoutedEventArgs e)
+        private void UserName_Click(object sender, RoutedEventArgs e)
         {
             var username = (sender as Button).Content;
             Frame.Navigate(typeof(UserInfo), username);
         }
+
     }
 }

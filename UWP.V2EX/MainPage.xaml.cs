@@ -25,53 +25,33 @@ namespace UWP.V2EX
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        public ObservableCollection<ThemeObject> hots { get; set; }
 
         public MainPage()
         {
             this.InitializeComponent();
-
-            hots = new ObservableCollection<ThemeObject>();
-            
+            BackButton.Visibility = Visibility.Collapsed;
+            MyFrame.Navigate(typeof(HotPage));
+            TitileTextBlock.Text = "Home";
+            Home.IsSelected = true;
         }
 
-        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        private void HamburgerButton_Click(object sender, RoutedEventArgs e)
         {
+            MySplitView.IsPaneOpen = !MySplitView.IsPaneOpen;
+        }
 
-            try
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (MyFrame.CanGoBack)
             {
-                Task t = V2EXAPIProxy.GetHotThemsAsync(hots);
-                await t;
+                MyFrame.GoBack();
+                Home.IsSelected = true;
             }
-            catch (Exception)
-            {
-                throw;
-             //   Hot_Title.Text = "加载失败！";
-            }
-
         }
 
-        private void hotsView_ItemClick(object sender, ItemClickEventArgs e)
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var topic = (ThemeObject)e.ClickedItem;
-            Frame.Navigate(typeof(Topic),topic);
-        }
 
-        private void HomeButton_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(HomePage));
-        }
-
-        private void NodeButton_Click(object sender, RoutedEventArgs e)
-        {
-            var nodename = (sender as Button).Content;
-            Frame.Navigate(typeof(NodePage),nodename);
-        }
-
-        private void UserName_Click(object sender, RoutedEventArgs e)
-        {
-            var username = (sender as Button).Content;
-            Frame.Navigate(typeof(UserInfo), username);
         }
     }
 }
