@@ -115,6 +115,7 @@
       <DependentUpon>NodePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SwipeableSplitView.cs" />
     <Compile Include="Topic.xaml.cs">
       <DependentUpon>Topic.xaml</DependentUpon>
     </Compile>
